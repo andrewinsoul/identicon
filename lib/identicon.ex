@@ -17,7 +17,11 @@ defmodule Identicon do
   end
 
   defp save_image(image, input) do
-    File.write("#{input}.png", image)
+    unless File.exists?("identicons") do
+      File.mkdir("identicons")
+    end
+
+    File.write("./identicons/#{input}.png", image)
   end
 
   defp draw_image(%Identicon.Image{color: color, pixel_map: pixel_map}) do
